@@ -1,6 +1,8 @@
-package wordutil
+// package wordutil
+package main
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -11,6 +13,16 @@ import (
 // Matching is case insensitive, e.g. "Orange" and "orange" is considered the
 // same word.
 func WordCount(s string) map[string]int {
-	// TODO: implement me
-	// HINT: You may find the `strings.Fields` and `strings.ToLower` functions helpful
+	word_count := make(map[string]int)
+	s = strings.ToLower(s)
+	words := strings.Split(s, " ")
+	fmt.Println(words)
+	for _, word := range words {
+		word_count[word]++
+	}
+	return word_count
+}
+
+func main() {
+	fmt.Println(WordCount("A string to do a test"))
 }
