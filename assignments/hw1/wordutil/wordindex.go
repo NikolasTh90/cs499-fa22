@@ -1,6 +1,8 @@
-package wordutil
+// package wordutil
+package main
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -12,6 +14,15 @@ import (
 // Matching is case insensitive, e.g. "Orange" and "orange" is considered the
 // same word.
 func WordIndex(s string) map[string]int {
-	// TODO: implement me
-	// HINT: You may find the `strings.Index` and `strings.ToLower` functions helpful
+	word_index := make(map[string]int)
+	s = strings.ToLower(s)
+	words := strings.Split(s, " ")
+	for _, word := range words {
+		word_index[word] = strings.Index(s, word)
+	}
+	return word_index
+}
+
+func main() {
+	fmt.Println(WordIndex("A string to do a test"))
 }

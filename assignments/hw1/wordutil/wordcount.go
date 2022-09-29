@@ -16,7 +16,6 @@ func WordCount(s string) map[string]int {
 	word_count := make(map[string]int)
 	s = strings.ToLower(s)
 	words := strings.Split(s, " ")
-	fmt.Println(words)
 	for _, word := range words {
 		word_count[word]++
 	}
