@@ -15,7 +15,7 @@ import (
 func WordCount(s string) map[string]int {
 	word_count := make(map[string]int)
 	s = strings.ToLower(s)
-	words := strings.Split(s, " ")
+	words := strings.Fields(s)
 	for _, word := range words {
 		word_count[word]++
 	}
