@@ -1,5 +1,5 @@
-// package wordutil
-package main
+package wordutil
+// package main
 
 import (
 	"fmt"
@@ -22,6 +22,6 @@ func WordCount(s string) map[string]int {
 	return word_count
 }
 
-func main() {
-	fmt.Println(WordCount("A string to do a test"))
-}
+// func main() {
+// 	fmt.Println(WordCount("A string to do a test"))
+// }
