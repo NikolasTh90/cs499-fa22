@@ -1,5 +1,5 @@
-// package wordutil
-package main
+package wordutil
+// package main
 
 import (
 	"fmt"
@@ -23,6 +23,6 @@ func WordIndex(s string) map[string]int {
 	return word_index
 }
 
-func main() {
-	fmt.Println(WordIndex("A string to do a test"))
-}
+// func main() {
+// 	fmt.Println(WordIndex("A string to do a test"))
+// }
