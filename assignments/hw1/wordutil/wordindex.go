@@ -16,7 +16,7 @@ import (
 func WordIndex(s string) map[string]int {
 	word_index := make(map[string]int)
 	s = strings.ToLower(s)
-	words := strings.Split(s, " ")
+	words := strings.Fields(s, " ")
 	for _, word := range words {
 		word_index[word] = strings.Index(s, word)
 	}
