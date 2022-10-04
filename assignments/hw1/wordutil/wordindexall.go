@@ -16,15 +16,15 @@ import (
 // same word.
 func WordIndexAll(s string) map[string][]int {
 	words := make(map[string][]int)
-	length := -1
+	index := -1
 	previous_word := ""
 	for _, word := range strings.Fields(s) {
-		if strings.Index(s, word) > length {
-			length = strings.Index(s, word)
+		if strings.Index(s, word) > index {
+			index = strings.Index(s, word)
 		} else {
-			length = length + len(previous_word) + 1
+			index = index + len(previous_word) + 1
 		}
-		words[strings.ToLower(word)] = append(words[strings.ToLower(word)], length)
+		words[strings.ToLower(word)] = append(words[strings.ToLower(word)], index)
 		previous_word = word
 	}
 	return words
