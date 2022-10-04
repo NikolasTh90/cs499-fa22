@@ -1,8 +1,8 @@
 package wordutil
+
 // package main
 
 import (
-	"fmt"
 	"strings"
 )
 

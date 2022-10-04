@@ -1,6 +1,9 @@
 package wordutil
 
+// package main
+
 import (
+	// "fmt"
 	"strings"
 )
 
@@ -12,6 +15,22 @@ import (
 // Matching is case insensitive, e.g. "Orange" and "orange" is considered the
 // same word.
 func WordIndexAll(s string) map[string][]int {
-	// TODO: implement me
-	// HINT: You may find the `strings.Index` and `strings.ToLower` functions helpful
+	words := make(map[string][]int)
+	length := -1
+	previous_word := ""
+	for _, word := range strings.Fields(s) {
+		if strings.Index(s, word) > length {
+			length = strings.Index(s, word)
+		} else {
+			length = length + len(previous_word) + 1
+		}
+		words[strings.ToLower(word)] = append(words[strings.ToLower(word)], length)
+		previous_word = word
+	}
+	return words
 }
+
+// func main() {
+// 	str := "Apple orange grape grapefruit apple Orange apple"
+// 	fmt.Println(WordIndexAll(str))
+// }
