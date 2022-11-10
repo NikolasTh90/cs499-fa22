@@ -3,3 +3,12 @@ syntax = "proto3";
 package geo;
 
 // TODO: Implement me
+// The latitude and longitude of the current location.
+type Request struct {
+	Lat float32
+	Lon float32
+}
+
+type Result struct {
+	HotelIds []string
+}
