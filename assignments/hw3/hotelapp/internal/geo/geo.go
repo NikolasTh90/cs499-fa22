@@ -7,9 +7,13 @@ import (
 	"net"
 	"time"
 
+	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/hailocab/go-geoindex"
 	"github.com/opentracing/opentracing-go"
 	pb "github.com/ucy-coast/hotel-app/internal/geo/proto"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/reflection"
 )
 
 // Geo implements the geo service

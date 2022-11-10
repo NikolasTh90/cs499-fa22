@@ -7,8 +7,12 @@ import (
 	"net"
 	"time"
 
+	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/opentracing/opentracing-go"
 	pb "github.com/ucy-coast/hotel-app/internal/profile/proto"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/keepalive"
+	"google.golang.org/grpc/reflection"
 )
 
 // Profile implements the profile service
