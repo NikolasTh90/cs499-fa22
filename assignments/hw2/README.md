@@ -2,7 +2,7 @@
 
 Submission Deadline: October 25, 2022
 
-This assignment comprises three parts. This is an individual assignment to be conducted individually by each student.
+This assignment comprises two parts. This is an individual assignment to be conducted individually by each student.
 
 ## Part 1: Load Balancing
 
@@ -59,7 +59,7 @@ You should then perform an investigation into how the number of client threads a
 
 Report and comment how the performance (throughput and response latency) scales with the number of client threads. Measure the index server CPU utilization and report how the CPU utilization is correlated with performance.
 
-#### Index Partitioning
+### Index Partitioning
 
 You should compare the response times of a setup using partitioning with two index servers working on different index parts and a configuration without partitioning. The queries are executed sequentially one at a time.
 
@@ -71,8 +71,8 @@ Report and comment how partitioning affects performance (throughput and response
 
 | Problem    | Points |
 |------------|--------|
-| Q1.1       | 30     |
-| Q1.2       | 20     |
+| Q1.1       | 25     |
+| Q1.2       | 25     |
 | Q2.1       | 25     |
 | Q2.2       | 25     |
 
