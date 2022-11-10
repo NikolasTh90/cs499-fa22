@@ -15,5 +15,5 @@ message Request {
 }
 
 message Result {
-	repeatead string hotelIds = 1;
+	repeated string hotelIds = 1;
 }
