@@ -3,12 +3,17 @@ syntax = "proto3";
 package geo;
 
 // TODO: Implement me
-// The latitude and longitude of the current location.
-type Request struct {
-	Lat float32
-	Lon float32
+service Geo {
+  rpc Nearby(Request) returns (Result);
 }
 
-type Result struct {
-	HotelIds []string
+
+// The latitude and longitude of the current location.
+message Request {
+	float lat = 1;
+	float lon = 2;
+}
+
+message Result {
+	repeatead string hotelIds = 1;
 }
