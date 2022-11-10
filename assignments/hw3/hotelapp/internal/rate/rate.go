@@ -2,6 +2,9 @@ package rate
 
 import (
 	"context"
+	"fmt"
+	"log"
+	"net"
 	"sort"
 	"time"
 
@@ -30,6 +33,41 @@ func NewRate(a string, p int, db *DatabaseSession, tr opentracing.Tracer) *Rate 
 // Run starts the server
 func (s *Rate) Run() error {
 	// TODO: Implement me
+
+	if s.port == 0 {
+		return fmt.Errorf("server port must be set")
+	}
+
+	opts := []grpc.ServerOption{
+		grpc.KeepaliveParams(keepalive.ServerParameters{
+			Timeout: 120 * time.Second,
+		}),
+		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
+			PermitWithoutStream: true,
+		}),
+		grpc.UnaryInterceptor(
+			otgrpc.OpenTracingServerInterceptor(s.tracer),
+		),
+	}
+
+	// Create an instance of the gRPC server
+	srv := grpc.NewServer(opts...)
+
+	// Register our service implementation with the gRPC server
+	pb.RegisterRateServer(srv, s)
+
+	// Register reflection service on gRPC server.
+	reflection.Register(srv)
+
+	// Listen for client requests
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", s.port))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+
+	// Accept and serve incoming client requests
+	log.Printf("Start Profile server. Addr: %s:%d\n", s.addr, s.port)
+	return srv.Serve(lis)
 }
 
 func inTimeSpan(start, end, check time.Time) bool {
