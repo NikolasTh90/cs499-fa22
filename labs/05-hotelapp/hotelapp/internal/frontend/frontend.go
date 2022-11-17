@@ -2,7 +2,6 @@ package frontend
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -10,15 +9,14 @@ import (
 
 	"github.com/ucy-coast/hotel-app/internal/profile"
 	"github.com/ucy-coast/hotel-app/internal/search"
-
 )
 
 // Frontend implements frontend service
 type Frontend struct {
-	port          int
-	addr          string
+	port    int
+	addr    string
 	search  *search.Search
-	profile  *profile.Profile
+	profile *profile.Profile
 }
 
 // NewFrontend returns a new server
@@ -40,6 +38,58 @@ func (s *Frontend) Run() error {
 func (s *Frontend) searchHandler(w http.ResponseWriter, r *http.Request) {
 	// TODO: Implement me
 	// HINT: Follow the instructions in Lab 05: Getting Started with Go Web Apps
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	// in/out dates from query params
+	inDate, outDate := r.URL.Query().Get("inDate"), r.URL.Query().Get("outDate")
+	if inDate == "" || outDate == "" {
+		http.Error(w, "Please specify inDate/outDate params", http.StatusBadRequest)
+		return
+	}
+
+	// lan/lon from query params
+	sLat, sLon := r.URL.Query().Get("lat"), r.URL.Query().Get("lon")
+	if sLat == "" || sLon == "" {
+		http.Error(w, "Please specify location params", http.StatusBadRequest)
+		return
+	}
+
+	Lat, _ := strconv.ParseFloat(sLat, 32)
+	lat := float32(Lat)
+	Lon, _ := strconv.ParseFloat(sLon, 32)
+	lon := float32(Lon)
+
+	log.Infof("searchHandler [lat: %v, lon: %v, inDate: %v, outDate: %v]", lat, lon, inDate, outDate)
+	// search for best hotels
+	searchResp, err := s.search.Nearby(&search.NearbyRequest{
+		Lat:     lat,
+		Lon:     lon,
+		InDate:  inDate,
+		OutDate: outDate,
+	})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// grab locale from query params or default to en
+	locale := r.URL.Query().Get("locale")
+	if locale == "" {
+		locale = "en"
+	}
+
+	// hotel profiles
+	profileResp, err := s.profile.GetProfiles(&profile.Request{
+		HotelIds: searchResp.HotelIds,
+		Locale:   locale,
+	})
+	if err != nil {
+		log.Error("SearchHandler GetProfiles failed")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json.NewEncoder(w).Encode(geoJSONResponse(profileResp.Hotels))
 }
 
 // return a geoJSON response that allows google map to plot points directly on map
