@@ -2,6 +2,7 @@ package frontend
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -33,6 +34,12 @@ func NewFrontend(a string, p int, s *search.Search, pr *profile.Profile) *Fronte
 func (s *Frontend) Run() error {
 	// TODO: Implement me
 	// HINT: Follow the instructions in Lab 05: Getting Started with Go Web Apps
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServer(http.Dir("internal/frontend/static")))
+	mux.Handle("/hotels", http.HandlerFunc(s.searchHandler))
+
+	log.Printf("Start Frontend server. Addr: %s:%d\n", s.addr, s.port)
+	return http.ListenAndServe(fmt.Sprintf(":%d", s.port), mux)
 }
 
 func (s *Frontend) searchHandler(w http.ResponseWriter, r *http.Request) {
