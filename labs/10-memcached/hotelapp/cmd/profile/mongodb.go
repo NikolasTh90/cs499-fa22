@@ -3,7 +3,7 @@
 package main
 
 import (
-	"time",
+	"time"
 	"flag"
 	"path/filepath"
 
