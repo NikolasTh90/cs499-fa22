@@ -3,9 +3,9 @@
 package main
 
 import (
-	"time"
 	"flag"
 	"path/filepath"
+	"time"
 
 	"github.com/ucy-coast/hotel-app/internal/profile"
 )
@@ -16,6 +16,7 @@ var (
 )
 
 func initializeProfileDatabase() *profile.DatabaseSession {
-	dbsession := profile.NewDatabaseSession(*database_addr, *memcache_addr)	dbsession.LoadDataFromJsonFile(filepath.Join(*jsonDataDir, "hotels.json"))
+	dbsession := profile.NewDatabaseSession(*database_addr, *memcache_addr)
+	dbsession.LoadDataFromJsonFile(filepath.Join(*jsonDataDir, "hotels.json"))
 	return dbsession
 }
