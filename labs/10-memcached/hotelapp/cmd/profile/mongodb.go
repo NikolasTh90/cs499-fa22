@@ -5,7 +5,6 @@ package main
 import (
 	"flag"
 	"path/filepath"
-	"time"
 
 	"github.com/ucy-coast/hotel-app/internal/profile"
 )
