@@ -1,6 +1,5 @@
 services:
   profile:
-    build: .
     image: ${REGISTRY}/hotel_app_profile_single_node_memdb
     container_name: 'hotel_app_profile'
     entrypoint: profile
@@ -9,7 +8,6 @@ services:
     restart: always
 
   nginx:
-    build: .
     image: nginx:1.20.0
     container_name: nginx
     ports:
