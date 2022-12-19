@@ -7,7 +7,9 @@ services:
     ports:
       - "8081"
     restart: always
+
   nginx:
+    build: .
     image: nginx:1.20.0
     container_name: nginx
     ports:
