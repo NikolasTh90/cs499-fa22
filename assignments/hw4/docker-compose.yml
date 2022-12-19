@@ -1,7 +1,7 @@
 services:
   profile:
     build: .
-    image: ${REGISTRY-127.0.0.1:5000}/hotel_app_profile_single_node_memdb
+    image: ${REGISTRY}/hotel_app_profile_single_node_memdb
     container_name: 'hotel_app_profile'
     entrypoint: profile
     ports:
