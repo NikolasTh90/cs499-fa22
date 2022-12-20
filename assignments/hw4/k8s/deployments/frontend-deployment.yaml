@@ -12,8 +12,6 @@ spec:
       labels:
         app: frontend
     spec:
-      nodeSelector:
-        node-type: frontend
       containers:
       - name: frontend
         image: hvolos01/hotel_app_frontend_single_node_memdb

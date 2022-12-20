@@ -12,8 +12,6 @@ spec:
       labels:
         app: profile
     spec:
-      nodeSelector:
-        node-type: profile
       containers:
       - name: profile
         image: hvolos01/hotel_app_profile_single_node_memdb

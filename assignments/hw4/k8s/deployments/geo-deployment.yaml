@@ -12,8 +12,6 @@ spec:
       labels:
         app: geo
     spec:
-      nodeSelector:
-        node-type: geo
       containers:
       - name: geo
         image: hvolos01/hotel_app_geo_single_node_memdb
