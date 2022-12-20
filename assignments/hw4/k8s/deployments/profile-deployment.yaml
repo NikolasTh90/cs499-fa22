@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile
+  template:
+    metadata:
+      labels:
+        app: profile
+    spec:
+      nodeSelector:
+        node-type: profile
+      containers:
+      - name: profile
+        image: hvolos01/hotel_app_profile_single_node_memdb
+        ports:
+        - containerPort: 8081

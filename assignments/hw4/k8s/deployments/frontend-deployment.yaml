@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      nodeSelector:
+        node-type: frontend
+      containers:
+      - name: frontend
+        image: hvolos01/hotel_app_frontend_single_node_memdb
+        ports:
+        - containerPort: 8080

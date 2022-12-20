@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rate-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rate
+  template:
+    metadata:
+      labels:
+        app: rate
+    spec:
+      nodeSelector:
+        node-type: rate
+      containers:
+      - name: rate
+        image: hvolos01/hotel_app_rate_single_node_memdb
+        ports:
+        - containerPort: 8084

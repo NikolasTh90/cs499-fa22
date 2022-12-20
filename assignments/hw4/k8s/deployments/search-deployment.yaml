@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      nodeSelector:
+        node-type: search
+      containers:
+      - name: search
+        image: hvolos01/hotel_app_search_single_node_memdb
+        ports:
+        - containerPort: 8082

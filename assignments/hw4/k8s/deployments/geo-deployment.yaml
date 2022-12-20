@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: geo
+  template:
+    metadata:
+      labels:
+        app: geo
+    spec:
+      nodeSelector:
+        node-type: geo
+      containers:
+      - name: geo
+        image: hvolos01/hotel_app_geo_single_node_memdb
+        ports:
+        - containerPort: 8083
