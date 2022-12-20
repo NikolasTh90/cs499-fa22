@@ -4,9 +4,9 @@ metadata:
   name: rate-deployment
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: rate
+  # selector:
+  #   matchLabels:
+  #     app: rate
   template:
     metadata:
       labels:

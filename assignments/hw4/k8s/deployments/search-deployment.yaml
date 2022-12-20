@@ -4,9 +4,9 @@ metadata:
   name: search-deployment
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: search
+  # selector:
+  #   matchLabels:
+  #     app: search
   template:
     metadata:
       labels:
